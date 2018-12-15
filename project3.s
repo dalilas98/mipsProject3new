@@ -73,6 +73,13 @@ main:
     	li $v0, 4                                   
     	syscall
     	j end
+
+
+#subfuctions
+sum:
+lw $a0, 0($sp)
+lw $a1, 4($sp)
+addi $sp, $sp, 8    #deallocate space for parameters
     	
     	converting: 
     	blt $s3, 48, printInvalidNum
@@ -102,16 +109,8 @@ main:
     	and $s5, $t1, $t4 
     	addi $s3, $t2, -55 
     	li $t7, 1 
-    	beq $t7, $s5, convert
-    	
-    	convert:
-    	mult $s0, $s1 
-    	subu $t4, $t4, 1
-    	beq $t4, 0, exit_loop
-    	
-    	li $t6, 27 
-    	mult $s0, $t6
-    	mflo $s0
+    	beq $t7, $s5, converting
+   
     	
     	exit_loop:
     	subu $t3, $t3, 1
