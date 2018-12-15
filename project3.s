@@ -80,6 +80,10 @@ sum:
 lw $a0, 0($sp)
 lw $a1, 4($sp)
 addi $sp, $sp, 8    #deallocate space for parameters
+
+addi $sp, $sp, -8
+sw $ra, 0($sp)
+sw $s0, 4($sp)
     	
     	converting: 
     	blt $s3, 48, printInvalidNum
