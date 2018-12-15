@@ -33,9 +33,6 @@ main:
         beq $t0, 32, begin 
         beq $t0, 10, printEmpty #jump to exit branch if equal
         beq $t0, $0, printEmpty 
-        
-        
-        
 	loop: 
 	lb $t1, 0($a0)
 	beq $t1,10, exit
