@@ -67,7 +67,7 @@ main:
 	begin: 
 	sub $t0, $t0, $t3
 	la $t3, 0
-	#after reading  thru string 	
+	#after reading  through the string 	
    	 printEmpty:
     	la $a0, emptyInput                  
     	li $v0, 4                                   
@@ -84,6 +84,12 @@ addi $sp, $sp, 8    #deallocate space for parameters
 addi $sp, $sp, -8
 sw $ra, 0($sp)
 sw $s0, 4($sp)
+
+lb $s0, 0($a0)  #s0 is used to store the first number from the array
+li $t0, 1
+bne $a1, $t0, dont_return_first		#base case: return first_number if len==1
+move $v0, $s0
+j end
     	
     	converting: 
     	blt $s3, 48, printInvalidNum
