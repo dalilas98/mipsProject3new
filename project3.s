@@ -87,15 +87,34 @@ sw $s0, 4($sp)
 
 lb $s0, 0($a0)  #s0 is used to store the first number from the array
 li $t0, 1
-bne $a1, $t0, dont_return_first		#base case: return first_number if len==1
+bne $a1, $t0, dontReturn		#base case: return first_number if len==1
 move $v0, $s0
 j end
+
+dontReturn:
+addi $a0, $a0, 1	#increment addr, effectively removing first element from array
+addi $a1, $a1, -1	#decrement length accordingly
+addi $sp, $sp, -8	#allocate space for parameters
+sw $a0, 0($sp)		#store parameters
+sw $a1, 4($sp)
+jal sum
+add $v0, $s0, $v0	#return first number + sum of the rest
+
+return:
+	lw $ra, 0($sp)
+	lw $s0, 4($sp)
+	addi $sp, $sp, 8
+	jr $ra
     	
     	converting: 
     	blt $s3, 48, printInvalidNum
     	blt $s3, 58, anyNum
     	blt $s3, 65, printInvalidNum
     	blt $s3, 128, printInvalidNum
+    	
+    	move $a0, $v0
+   	li $v0, 1
+    	syscall
     	
     	 anyNum:
     	 addi $s3, $s3, -48
